@@ -3,7 +3,7 @@
     <div>
       <logo />
       <h1 class="title">
-        Github Actions D.O. test
+        Github Actions D.O. Static
       </h1>
       <nuxt-link to="/page2">Page 2</nuxt-link>
     </div>
