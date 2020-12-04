@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'dps.eckf.pw',
+      name: 'static.eckf.pw',
       port: 3000,
       script: './node_modules/nuxt/bin/nuxt.js',
       args      : "start",

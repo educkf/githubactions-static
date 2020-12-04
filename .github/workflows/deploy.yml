@@ -26,7 +26,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - run: npm ci
-      - run: npm run build
+      - run: npm run generate
 
       - name: Deploy website to digital ocean
         uses: appleboy/scp-action@master
@@ -36,17 +36,6 @@ jobs:
           PORT: ${{ secrets.PORT }}
           KEY: ${{ secrets.SSHKEY }}
         with:
-          source: "./.nuxt,./dist,./nuxt.config.js,./package.json,./static,./ecosystem.config.js"
+          source: "./dist"
           target: /var/www/html/${{ secrets.PROJECT }}
           strip_components: 1
-
-      - name: Start Server
-        uses: appleboy/ssh-action@master
-        with:
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
-          KEY: ${{ secrets.SSHKEY }}
-          script: |
-            cd /var/www/html/${{ secrets.PROJECT }}
-            pm2 reload ${{ secrets.PROJECT }}.eckf.pw
