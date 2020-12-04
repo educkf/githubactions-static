@@ -3,9 +3,16 @@
     <div>
       <logo />
       <h1 class="title">
-        Github Actions D.O. - Static 2
+        Static 2
       </h1>
       <nuxt-link to="/">Index</nuxt-link>
+
+      <div class="my-30">
+        <div v-for="post in posts" :key="post.id" class="py-6 border-b">
+          {{ post.title }}
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -16,7 +23,22 @@ import Logo from '~/components/Logo.vue'
 export default {
   components: {
     Logo
-  }
+  },
+  data() {
+    return {
+      posts: []
+    }
+  },
+
+  async asyncData ({ params, error }) {
+    const posts = await fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(response => response.json())
+      .then(json => json)
+
+    return {
+      posts: posts
+    }
+  },
 }
 </script>
 
@@ -50,5 +72,19 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+
+.my-30 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.py-6 {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.border-b {
+  border-bottom: 1px solid #ddd;
 }
 </style>
